@@ -1,19 +1,19 @@
-# Phishing Detection using Random Forest
+# Deteksi URL Phishing Menggunakan Random Forest
 
-This project implements a machine learning model using Random Forest to detect phishing URLs. The model extracts various features from URLs and classifies them as either legitimate or phishing attempts.
+Proyek ini mengimplementasikan model machine learning menggunakan Random Forest untuk mendeteksi URL phishing. Model ini mengekstrak berbagai fitur dari URL dan mengklasifikasikannya sebagai URL legitimate (sah) atau upaya phishing.
 
-## Dependencies
+## Dependensi
 
-The project requires the following Python libraries:
+Proyek ini membutuhkan beberapa library Python berikut:
 
-- pandas: Data manipulation and analysis
-- scikit-learn: Machine learning algorithms and tools
-- joblib: Model persistence
-- re: Regular expressions
+- pandas: Untuk manipulasi dan analisis data
+- scikit-learn: Untuk algoritma dan perangkat machine learning
+- joblib: Untuk penyimpanan model
+- re: Untuk penggunaan regular expressions
 
-## Implementation Details
+## Detail Implementasi
 
-### Library Imports
+### Import Library
 
 ```python
 import pandas as pd
@@ -25,15 +25,15 @@ import joblib
 import re
 ```
 
-### Main Components
+### Komponen Utama
 
-1. **Data Loading**
-   - Reads the dataset from `data.csv`
-   - Dataset contains URLs and their corresponding labels (0 for legitimate, 1 for phishing)
+1. **Memuat Data**
+   - Membaca dataset dari `data.csv`
+   - Dataset berisi URL dan labelnya (0 untuk legitimate, 1 untuk phishing)
 
-2. **Data Preprocessing**
-   - Separates features (X) and labels (y)
-   - Normalizes feature values using MinMaxScaler to range [0, 1]
+2. **Preprocessing Data**
+   - Memisahkan fitur (X) dan label (y)
+   - Menormalisasi nilai fitur menggunakan MinMaxScaler ke rentang [0, 1]
 
    ```python
    X = data.drop(columns=['phishing'])
@@ -42,84 +42,84 @@ import re
    X_scaled = scaler.fit_transform(X)
    ```
 
-3. **Data Splitting**
-   - Splits data into training (80%) and testing (20%) sets
+3. **Pembagian Data**
+   - Membagi data menjadi data latih (80%) dan data uji (20%)
 
    ```python
    X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
    ```
 
-4. **Model Training**
-   - Implements Random Forest Classifier with 100 trees
+4. **Pelatihan Model**
+   - Mengimplementasikan Random Forest Classifier dengan 100 pohon keputusan
 
    ```python
    model = RandomForestClassifier(n_estimators=100, random_state=42)
    model.fit(X_train, y_train)
    ```
 
-5. **Model Evaluation**
-   - Calculates accuracy and generates classification report
-   - Visualizes results using confusion matrix
+5. **Evaluasi Model**
+   - Menghitung akurasi dan menghasilkan laporan klasifikasi
+   - Memvisualisasikan hasil menggunakan confusion matrix
 
-6. **Model Persistence**
-   - Saves trained model to `phishing_model.pkl`
-   - Allows model reuse without retraining
+6. **Penyimpanan Model**
+   - Menyimpan model yang telah dilatih ke `phishing_model.pkl`
+   - Memungkinkan penggunaan model tanpa perlu pelatihan ulang
 
-### Feature Extraction
+### Ekstraksi Fitur
 
-The `extract_features` function extracts the following features from URLs:
+Fungsi `extract_features` mengekstrak fitur-fitur berikut dari URL:
 
-- Character counts (., -, _, /, ?, =, @, &, !, etc.)
-- URL length
-- Number of TLDs
-- Presence of email indicators
-- Number of redirects
-- Google index indicators
-- URL shortening detection
+- Jumlah karakter (., -, _, /, ?, =, @, &, !, dll.)
+- Panjang URL
+- Jumlah domain tingkat atas (TLD)
+- Keberadaan indikator email
+- Jumlah pengalihan (redirect)
+- Indikator indeks Google
+- Deteksi pemendekan URL
 
 ```python
 def extract_features(url):
     features = {
         "qty_dot_url": url.count('.'),
         "qty_hyphen_url": url.count('-'),
-        # ... (other features)
+        # ... (fitur lainnya)
         "url_shortened": 1 if len(url) < 20 else 0
     }
     return features
 ```
 
-### URL Prediction
+### Prediksi URL
 
-The system can predict whether a new URL is phishing or legitimate:
+Sistem dapat memprediksi apakah URL baru adalah phishing atau legitimate:
 
-1. Takes URL input from user
-2. Extracts features
-3. Scales features using trained scaler
-4. Makes prediction using loaded model
-5. Updates dataset with new entry
+1. Menerima input URL dari pengguna
+2. Mengekstrak fitur
+3. Menskalakan fitur menggunakan scaler yang telah dilatih
+4. Melakukan prediksi menggunakan model yang dimuat
+5. Memperbarui dataset dengan entri baru
 
-## Usage
+## Cara Penggunaan
 
-1. Load the model:
+1. Memuat model:
 
    ```python
    loaded_model = joblib.load("phishing_model.pkl")
    ```
 
-2. Predict new URLs:
+2. Memprediksi URL baru:
 
    ```python
-   input_url = input("Enter a URL to check: ")
+   input_url = input("Masukkan URL yang ingin dicek: ")
    new_data_features = extract_features(input_url)
    new_data_df = pd.DataFrame([new_data_features])
    new_data_scaled = scaler.transform(new_data_df)
    prediction = loaded_model.predict(new_data_scaled)
    ```
 
-3. View results:
+3. Melihat hasil:
 
    ```python
-   print("Prediction for the URL:", "Phishing" if prediction[0] == 1 else "Legitimate")
+   print("Hasil prediksi URL:", "Phishing" if prediction[0] == 1 else "Legitimate")
    ```
 
-The system automatically updates the dataset with new predictions, maintaining an evolving training set for future model improvements.
+Sistem secara otomatis memperbarui dataset dengan prediksi baru, mempertahankan set pelatihan yang berkembang untuk peningkatan model di masa depan.

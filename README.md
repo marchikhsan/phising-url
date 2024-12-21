@@ -11,6 +11,10 @@ Proyek ini membutuhkan beberapa library Python berikut:
 - joblib: Untuk penyimpanan model
 - re: Untuk penggunaan regular expressions
 
+## Sumber Dataset
+
+Dataset yang digunakan dalam proyek ini dapat diunduh dari [link sumber dataset](https://www.kaggle.com/datasets/michaelsannova/phising-url-dataset).
+
 ## Detail Implementasi
 
 ### Import Library

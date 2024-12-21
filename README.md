@@ -3,7 +3,6 @@
 Proyek ini mengimplementasikan model machine learning menggunakan Random Forest untuk mendeteksi URL phishing. Model ini mengekstrak berbagai fitur dari URL dan mengklasifikasikannya sebagai URL legitimate (sah) atau upaya phishing.
 
 - 24.55.1596 FREDY SITINJAK
-- 24.55.1604 RAFI BUDIARTO
 - 24.55.1619 HASNI ANAS
 - 24.55.1622 MUHAMMAD IKHSAN
 

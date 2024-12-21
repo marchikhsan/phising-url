@@ -85,19 +85,19 @@ new_data_scaled = scaler.transform(new_data_df)
 # Predict
 prediction = loaded_model.predict(new_data_scaled)[0]
 
-# Translate prediction to Indonesian labels
+# Label prediction
 label = "Phishing" if prediction == 1 else "Aman"
 print(f"\nPrediksi untuk URL: {label}")
 
-# Tambahkan data baru ke dataset
-new_data_features['phishing'] = prediction  # Tambahkan label
+# Adding new datalabel url to dataset
+new_data_features['phishing'] = prediction
 
-# Konversi ke DataFrame
+# Convert to DataFrame
 new_data_df = pd.DataFrame([new_data_features])
 
-# Tambahkan ke dataset
+# Adding ke dataset
 data = pd.concat([data, new_data_df], ignore_index=True)
 
-# Simpan dataset yang diperbarui
+# Update dataset with new data
 data.to_csv("data.csv", index=False)
 print("URL berhasil ditambahkan ke dataset!")

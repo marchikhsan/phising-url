@@ -13,7 +13,7 @@ Proyek ini membutuhkan beberapa library Python berikut:
 
 ## Sumber Dataset
 
-Dataset yang digunakan dalam proyek ini dapat diunduh dari [link sumber dataset](https://www.kaggle.com/datasets/michaelsannova/phising-url-dataset).
+Dataset yang digunakan dalam proyek ini dapat diunduh dari [www.kaggle.com](https://www.kaggle.com/datasets/michaelsannova/phising-url-dataset).
 
 ## Detail Implementasi
 
